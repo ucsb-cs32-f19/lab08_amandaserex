@@ -72,9 +72,6 @@ void SimpleList<T>::insert(T item) throw (FullListException){
 	}
 	elements[numElements]=item;
 	numElements=numElements+1;
-	for(int i=0; i<numElements;i++){
-		std::cout<<elements[i]<<std::endl;
-	}
 	return;
 }
 
