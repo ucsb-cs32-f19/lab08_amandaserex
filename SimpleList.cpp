@@ -3,6 +3,7 @@
 
 template <class T>
 SimpleList<T>::SimpleList(){
+	numElements=0;
 	T a[CAPACITY];
 	for(int i=0;i<CAPACITY;i++){
 		a[i]=NULL;
@@ -54,14 +55,7 @@ T SimpleList<T>::last() const throw (EmptyListException){
 
 template <class T>
 int SimpleList<T>::getNumElements() const{
-	int count=0;
-	for(int i=0; i<CAPACITY; i++){
-		if(elements[i]==NULL){
-			return count;
-		}
-		count=count+1;
-	}
-	return count;
+	return numElements;
 }
 
 template <class T>
@@ -70,7 +64,7 @@ void SimpleList<T>::insert(T item) throw (FullListException){
 	if(h==CAPACITY){
 		throw FullListException();
 	}
-	elements[h]=item;
+	numElements=numElements+1;
 	return;
 }
 
