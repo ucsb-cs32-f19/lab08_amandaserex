@@ -5,9 +5,6 @@ template <class T>
 SimpleList<T>::SimpleList(){
 	numElements=0;
 	elements = new  T[CAPACITY];
-	for(int i=0;i<CAPACITY;i++){
-		elements[i]=NULL;
-	}
 }
 
 template <class T>
@@ -26,7 +23,7 @@ SimpleList<T>::~SimpleList(){
 
 template <class T>
 T SimpleList<T>::at(int index) const throw (InvalidIndexException){
-	if(elements[index]==NULL){
+	if(index>=numElements || index<0){
 		throw InvalidIndexException();
 	}
 	return elements[index];
@@ -34,7 +31,7 @@ T SimpleList<T>::at(int index) const throw (InvalidIndexException){
 
 template <class T>
 bool SimpleList<T>::empty() const{
-	if(elements==NULL){
+	if(numElements==0){
 		return true;
 	}
 	return false;
@@ -54,11 +51,7 @@ T SimpleList<T>::last() const throw (EmptyListException){
 	if(empty()){
 		throw EmptyListException();
 	}
-	for(int i=CAPACITY-1; i>=0;i--){
-		if(elements[i]!=NULL){
-			return elements[i];
-		}
-	}
+	return elements[numElements-1];
 }
 
 template <class T>
@@ -83,12 +76,12 @@ void SimpleList<T>::remove(int index) throw (InvalidIndexException, EmptyListExc
 	}
 	at(index);
 	int move=index;
-	while(elements[move]!=NULL && move+1<CAPACITY){
+	while(move<numElements){
 		elements[move]=elements[move+1];
 		move=move+1;
 	}
 	if(move+1==CAPACITY){
-		elements[move]=NULL;
+		delete elements[move];
 	}
 	numElements=numElements-1;
 	return;
