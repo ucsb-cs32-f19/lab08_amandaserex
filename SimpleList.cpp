@@ -4,21 +4,24 @@
 template <class T>
 SimpleList<T>::SimpleList(){
 	numElements=0;
-	elements = new  a[CAPACITY];
+	elements = new  T[CAPACITY];
 	for(int i=0;i<CAPACITY;i++){
 		elements[i]=NULL;
 	}
 }
+
+template <class T>
 void destroy(T* t){
 	delete t;
 }
 
 template <class T>
 SimpleList<T>::~SimpleList(){
-	if(is_pointer<T>::value){
-		destroy(element[i]);
+	for(int i=0; i<numElements; i++){
+		if(std::is_pointer<T>::value){
+			destroy(elements[i]);
+				}
 	}
-
 }
 
 template <class T>
