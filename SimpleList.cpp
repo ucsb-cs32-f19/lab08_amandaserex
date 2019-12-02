@@ -67,11 +67,14 @@ int SimpleList<T>::getNumElements() const{
 
 template <class T>
 void SimpleList<T>::insert(T item) throw (FullListException){
-	int h = getNumElements();
-	if(h==CAPACITY){
+	if(numElements==CAPACITY){
 		throw FullListException();
 	}
+	elements[numElements]=item;
 	numElements=numElements+1;
+	for(int i=0; i<numElements;i++){
+		std::cout<<elements[i]<<std::endl;
+	}
 	return;
 }
 
