@@ -6,6 +6,9 @@ SimpleList<T>::SimpleList(){
 	numElements=0;
 	elements = new  T[CAPACITY];
 }
+template <class T>
+void destroy(T t){
+}
 
 template <class T>
 void destroy(T* t){
@@ -18,6 +21,9 @@ SimpleList<T>::~SimpleList(){
 		if(std::is_pointer<T>::value){
 			destroy(elements[i]);
 				}
+		else{
+			destroy(elements[i]);
+		}
 	}
 }
 
@@ -81,7 +87,7 @@ void SimpleList<T>::remove(int index) throw (InvalidIndexException, EmptyListExc
 		move=move+1;
 	}
 	if(move+1==CAPACITY){
-		delete elements[move];
+		destroy(elements[move]);
 	}
 	numElements=numElements-1;
 	return;
