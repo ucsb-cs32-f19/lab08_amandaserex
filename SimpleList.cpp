@@ -89,7 +89,9 @@ void SimpleList<T>::remove(int index) throw (InvalidIndexException, EmptyListExc
 		move=move+1;
 	}
 	numElements=numElements-1;
-	//destroy(elements[numElements]);
+	if(std::is_pointer<T>::value){
+		destroy(elements[move-1]);
+	}
 	return;
 }
 
