@@ -12,16 +12,20 @@ template <class T>
 void destroy(T* element){
 	delete element;
 }
+template <class T>
+void destroy(T element){
+}
 
 template <class T>
 SimpleList<T>::~SimpleList(){
 		if(std::is_pointer<T>::value){
-			for(int i=0; i<CAPACITY; i++){
-				delete elements[i];
+			for(int i=0; i<numElements; i++){
+				destroy(elements[i]);
 				}
-		}
-		else{
 			delete [] elements;
+		}
+		else{ 
+			delete[] elements;
 		}
 }
 
@@ -85,6 +89,7 @@ void SimpleList<T>::remove(int index) throw (InvalidIndexException, EmptyListExc
 		move=move+1;
 	}
 	numElements=numElements-1;
+	//destroy(elements[numElements]);
 	return;
 }
 
