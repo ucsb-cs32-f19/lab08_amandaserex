@@ -84,14 +84,12 @@ void SimpleList<T>::remove(int index) throw (InvalidIndexException, EmptyListExc
 	}
 	at(index);
 	int move=index;
+	destroy(elements[index]);
 	while(move<numElements){
 		elements[move]=elements[move+1];
 		move=move+1;
 	}
 	numElements=numElements-1;
-	if(std::is_pointer<T>::value){
-		destroy(elements[move-1]);
-	}
 	return;
 }
 
